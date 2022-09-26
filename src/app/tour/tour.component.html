@@ -1,0 +1,129 @@
+<section>
+  <!--for demo wrap-->
+  <h1>Quản Lý Chuyến Du Lịch</h1>
+  <div class="input-group mb-3">
+    <input id="search" type="text" class="form-control" placeholder="Tìm kiếm sản phẩm"
+           aria-label="Recipient's username" aria-describedby="button-addon2">
+    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Tìm kiếm
+    </button>
+  </div>
+  <button (click)="displayTour()"  class="btn btn-primary">
+    Tất cả chuyến du lịch
+  </button>
+  <button (click)="displayFormCreate()"  style="margin-left: 2px " type="button" class="btn btn-primary">
+    Tạo mới chuyến du lịch
+  </button>
+  <br>
+  <div id="get_by_brands">
+
+  </div>
+
+
+  <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+      <tr>
+        <th>STT</th>
+        <th>Tên</th>
+        <th>Giá</th>
+        <th style="text-align:center">Hành động</th>
+      </tr>
+      </thead>
+    </table>
+  </div>
+  <div id="list-provinces" class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+      <tr *ngFor="let t of tours, index as i">
+        <td>{{i + 1}}</td>
+        <td>{{t.title}}</td>
+        <td>{{t.price}}</td>
+        <td style="text-align:center">
+          <button class="btn btn-danger" (click)="detailTour(t.id)">Xem</button>
+          <button style="margin: 1px" class="btn btn-danger" (click)="updateForm(t.id)">Sửa</button>
+          <button class="btn btn-danger" (click)="deleteProvince(t.id)">Xóa</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- The Modal Create And Update -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 id="titleFrom" class="modal-title"></h4>
+        <button type="button" class="btn-close" (click)="closeFromCreate()"></button>
+      </div>
+<!--       Modal body-->
+      <form [formGroup]="tourForm" enctype="multipart/form-data">
+        <table class="modal-body">
+          <tr>
+            <td>
+              <input id="title" formControlName="title" type="text">
+              Tên
+            </td>
+
+          </tr>
+          <tr>
+            <td>
+              <input id="price" formControlName="price" type="text">
+              Giá
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input id="description"  formControlName="description" type="text">
+              Miêu tả
+            </td>
+          </tr>
+          <tr>
+            <td id="messageCreate">
+            </td>
+          </tr>
+        </table>
+        <!-- Modal footer -->
+        <div align="center" class="modal-footer">
+          <button (click)="createTour()" hidden id="buttonCreate" class="btn btn-danger">Tạo mới thành phố</button>
+          <button type="reset" hidden id="rest" class="btn btn-danger">Tạo mới chuyến du lịch</button>
+          <button (click)="updateTour()" hidden id="buttonUpdate" class="btn btn-danger">Chỉnh sửa chuyến du lịch</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- End Modal Create And Update -->
+<!--Detail-->
+<div class="modal" id="detailModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div align="center" class="modal-header">
+        <h4 id="titleFromDetail" class="modal-title">Thông tin chuyến du lịch</h4>
+        <button (click)="closeFromCreate()" type="button" class="btn-close"></button>
+      </div>
+      <div class="modal-body" >
+        <form action="" >
+          <div style="font-size: 20px" id="titleDetail" >
+
+          </div>
+          <br>
+          <div style="font-size: 20px" id="priceDetail" >
+
+          </div>
+          <br>
+          <div style="font-size: 20px" id="descriptionDetail" >
+
+          </div>
+        </form>
+
+      </div>
+      <!-- Modal body -->
+    </div>
+  </div>
+</div>
+<!--End detail-->
